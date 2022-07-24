@@ -10,21 +10,46 @@ class MainScreen extends StatelessWidget {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         return Scaffold(
-          appBar: AppBar(
-            title: const Text('Wisata Bandung'),
-          ),
-          body: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-              if (constraints.maxWidth <= 600) {
-                return const TourismPlaceList();
-              } else if (constraints.maxWidth <= 1200) {
-                return const TourismPlaceGrid(gridCount: 4);
-              } else {
-                return const TourismPlaceGrid(gridCount: 6);
-              }
-            },
-          ),
-        );
+            appBar: AppBar(
+              title: const Text('Wisata Bandung'),
+            ),
+            body: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: TextField(
+                    // onChanged: (value) {
+                    //   setState(() {
+                    //     searchString = value.toLowerCase();
+                    //   });
+                    // },
+                    decoration: InputDecoration(
+                      labelText: 'Search',
+                      suffixIcon: Icon(Icons.search),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Expanded(
+                  child: LayoutBuilder(
+                    builder:
+                        (BuildContext context, BoxConstraints constraints) {
+                      if (constraints.maxWidth <= 600) {
+                        return const TourismPlaceList();
+                      } else if (constraints.maxWidth <= 1200) {
+                        return const TourismPlaceGrid(gridCount: 4);
+                      } else {
+                        return const TourismPlaceGrid(gridCount: 6);
+                      }
+                    },
+                  ),
+                ),
+              ],
+            ));
       },
     );
   }
